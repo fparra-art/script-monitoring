@@ -1,5 +1,5 @@
 services:
   main_container:
-    image: php-image
+    image: my-apache-php
     ports:
-    - "8080:8080"
+    - "80:80"

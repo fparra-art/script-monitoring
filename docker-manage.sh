@@ -15,3 +15,7 @@ case ${docker_parameter,*} in
     ;;
 esac
 
+
+function GetParameterFromComparator(){
+    
+}

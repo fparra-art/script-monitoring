@@ -15,6 +15,8 @@ echo "Hello \n";
     <title>Document</title>
 </head>
 <body>
-    
+    <label for="file-input">Enter a file to check for security warning</label>
+    <input type="file" id="file-input" accept=".php">
+
 </body>
 </html>
