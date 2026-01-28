@@ -3,3 +3,13 @@ services:
     image: my-apache-php
     ports:
     - "80:80"
+    env_file:
+      - path: ./.env 
+        required: true
+    environment:
+      SFTP_PWD: /run/secrets/my_secret
+    secrets:
+      - my_secret
+secrets:
+  my_secret:
+    file: ./my_secret.txt

@@ -1,0 +1,3 @@
+<?php 
+
+$mysqli = new mysqli("10.0.123.112", "U_ulysse", "Q5bfB8YAgeAyI", "DB_ulysse");
