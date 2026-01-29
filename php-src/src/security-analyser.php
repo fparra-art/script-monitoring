@@ -3,9 +3,6 @@
 function CheckForVulnerability(string $_line)
 {
 
-    if (IsLineAConstruct($_line) >= 0) {
-        return IsTheConstructABDD($_line);
-    }
 
     return -1;
 }
@@ -22,7 +19,7 @@ function IsLineAConstruct(string $_line): int
     return $isConstruct;
 }
 
-function IsTheConstructABDD(string $line): int
+function IsTheConstructABDD(string $_line): int
 {
 
     $isBDD = -1;
@@ -30,7 +27,7 @@ function IsTheConstructABDD(string $line): int
 
     for ($i = 0; $i < count($bddDeclarationType); $i++) {
 
-        $b_foundBDDDeclaration = strpos(strtolower($line), $bddDeclarationType[$i], 0);
+        $b_foundBDDDeclaration = strpos(strtolower($_line), $bddDeclarationType[$i], 0);
 
         if ($b_foundBDDDeclaration !== false) {
             $isBDD = $b_foundBDDDeclaration;
@@ -40,4 +37,11 @@ function IsTheConstructABDD(string $line): int
     }
 
     return $isBDD;
+}
+
+
+function CheckHardCodedInformation($_line){
+    if (IsLineAConstruct($_line) >= 0 && IsTheConstructABDD($_line) >= 0){
+
+    }
 }
