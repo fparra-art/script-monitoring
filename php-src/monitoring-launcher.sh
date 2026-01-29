@@ -1,3 +1,15 @@
 #!/bin/bash
 
-cat ./TestFiles/Faille1.php
+fileOutput="$(< ./TestFiles/Faille1.php)";
+
+
+
+
+filePath='./raw-files/first-analyse.txt';
+
+touch $filePath;
+
+echo $fileOutput > $filePath
+
+
+
