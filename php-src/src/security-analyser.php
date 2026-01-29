@@ -1,32 +1,43 @@
 <?php
 
-$dir = "../raw-files/";
-$fileArrayFromDir = scandir($dir, 1);
+function CheckForVulnerability(string $_line)
+{
 
-//remove ".." && "." reference from the array
-$cleanFileArray = array_splice($fileArrayFromDir, 0, -2);
-
-for ($i = 0; $i < count($cleanFileArray); $i++) {
-
-    $currentFilePath = $dir . $cleanFileArray[$i];
-    $handler = fopen($currentFilePath, "r");
-
-    if ($handler === FALSE) {
-        exit("Could not open $currentFilePath");
+    if (IsLineAConstruct($_line) >= 0) {
+        return IsTheConstructABDD($_line);
     }
 
-    $filesize = filesize($currentFilePath);
+    return -1;
+}
 
-    $lineIndex = 0;
-    while (($buffer = fgets($handler, 4096)) !== false){
-        echo $lineIndex . ": " . $buffer . "<br>";
-        $lineIndex++;
+
+function IsLineAConstruct(string $_line): int
+{
+    $isConstruct = -1;
+    $isConstruct = strpos($_line, "new", 0);
+    if ($isConstruct === false) {
+        $isConstruct = -1;
     }
 
+    return $isConstruct;
+}
 
-    if (!feof($handler)){
-        echo "Error : unexpected fgets() fail\n";
+function IsTheConstructABDD(string $line): int
+{
+
+    $isBDD = -1;
+    $bddDeclarationType = array("pdo", "mysqli");
+
+    for ($i = 0; $i < count($bddDeclarationType); $i++) {
+
+        $b_foundBDDDeclaration = strpos(strtolower($line), $bddDeclarationType[$i], 0);
+
+        if ($b_foundBDDDeclaration !== false) {
+            $isBDD = $b_foundBDDDeclaration;
+            break;
+        }
+        echo "<br>";
     }
 
-     fclose($handler);
+    return $isBDD;
 }
